@@ -1,0 +1,11 @@
+# Create container
+azcopy make 'https://cellama.blob.core.windows.net/llamamodels'
+
+
+# Copy contents of a folder to blob storage
+azcopy copy ./models/meta-llama 'https://cellama.blob.core.windows.net/llamamodels' --recursive
+
+
+# Download directory - meta-llama/Meta-Llama-3.1-8B-Instruct
+azcopy copy 'https://cellama.blob.core.windows.net/llamamodels/meta-llama/Meta-Llama-3.1-8B-Instruct' '.' --recursive
+
