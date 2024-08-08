@@ -1,23 +1,20 @@
-torchrun --nproc_per_node 1 "llama3/example_text_completion.py" \
-    --ckpt_dir "/workspace/llmfinetuning/llama-models/models/llama3_1/Meta-Llama-3.1-8B/" \
-    --tokenizer_path "/workspace/llmfinetuning/llama-models/models/llama3_1/Meta-Llama-3.1-8B/tokenizer.model" \
-    --max_seq_len 128 --max_batch_size 4
-
-
-torchrun --nproc_per_node 1 example_chat_completion.py \
-    --ckpt_dir "/workspace/llmfinetuning/llama-models/models/llama3_1/Meta-Llama-3.1-8B-Instruct" \
-    --tokenizer_path "/workspace/llmfinetuning/llama-models/models/llama3_1/Meta-Llama-3.1-8B-Instruct/tokenizer.model" \
-    --max_seq_len 512 --max_batch_size 6
-
-
-torchrun --nproc_per_node 1 test_chat.py \
-    --ckpt_dir "/workspace/llmfinetuning/llama-models/models/llama3_1/Meta-Llama-3.1-8B-Instruct" \
-    --tokenizer_path "/workspace/llmfinetuning/llama-models/models/llama3_1/Meta-Llama-3.1-8B-Instruct/tokenizer.model" \
-    --max_seq_len 1024 --max_batch_size 4
-
-
 # Basemodel
-torchrun --nproc_per_node 1 test_generate_basemodel.py \
-    --ckpt_dir "/workspace/llmfinetuning/llama-models/models/llama3_1/Meta-Llama-3.1-8B/" \
-    --tokenizer_path "/workspace/llmfinetuning/llama-models/models/llama3_1/Meta-Llama-3.1-8B/tokenizer.model" \
+# Change the ckpt_dir and tokenizer_path args to the basemodel directory
+torchrun --nproc_per_node 1 scripts/test_generate_basemodel.py \
+    --ckpt_dir "/workspace/Meta-Llama-3.1-8B/" \
+    --tokenizer_path "/workspace/Meta-Llama-3.1-8B/tokenizer.model" \
     --max_seq_len 512 --max_batch_size 4
+
+
+# Instruct Model
+# Change the ckpt_dir and tokenizer_path args to the basemodel directory
+torchrun --nproc_per_node 1 scripts/test_chat_instruct.py \
+    --ckpt_dir "/workspace/Meta-Llama-3.1-8B-Instruct/" \
+    --tokenizer_path "/workspace/Meta-Llama-3.1-8B-Instruct/tokenizer.model" \
+    --max_seq_len 2048 --max_batch_size 1
+
+
+torchrun --nproc_per_node 1 scripts/cricket_prompt.py \
+    --ckpt_dir "/workspace/Meta-Llama-3.1-8B-Instruct/" \
+    --tokenizer_path "/workspace/Meta-Llama-3.1-8B-Instruct/tokenizer.model" \
+    --max_seq_len 2048 --max_batch_size 1

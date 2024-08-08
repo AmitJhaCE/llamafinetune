@@ -1,11 +1,29 @@
-# Create container
+## Get Models stored in blob storage
+## Install azcopy -- run as root
+##
+curl -sSL -O https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb
+dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+apt-get update
+apt-get install azcopy
+
+## Export Az copy service principle related information
+##
+export AZCOPY_AUTO_LOGIN_TYPE=SPN
+export AZCOPY_SPA_APPLICATION_ID=<application-id>
+export AZCOPY_SPA_CLIENT_SECRET=<client-secret>
+export AZCOPY_TENANT_ID=<tenant-id>
+
+# Some sample commands
+## Create container
+##
 azcopy make 'https://cellama.blob.core.windows.net/llamamodels'
 
-
-# Copy contents of a folder to blob storage
+## Copy contents of a folder to blob storage
+##
 azcopy copy ./models/meta-llama 'https://cellama.blob.core.windows.net/llamamodels' --recursive
 
-
-# Download directory - meta-llama/Meta-Llama-3.1-8B-Instruct
-azcopy copy 'https://cellama.blob.core.windows.net/llamamodels/meta-llama/Meta-Llama-3.1-8B-Instruct' '.' --recursive
-
+## Download directory - meta-llama/Meta-Llama-3.1-8B-Instruct
+##
+azcopy copy 'https://cellama.blob.core.windows.net/llamamodels/meta-llama/Meta-Llama-3.1-8B-Instruct' '/workspace/' --recursive
+azcopy copy 'https://cellama.blob.core.windows.net/llamamodels/meta-llama/Meta-Llama-3.1-8B' '/workspace/' --recursive

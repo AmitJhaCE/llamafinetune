@@ -312,6 +312,8 @@ class Llama:
         prompt_tokens = [
             self.formatter.encode_dialog_prompt(dialog) for dialog in dialogs
         ]
+        for prompt_token in prompt_tokens:
+            print(f"Total number of input tokens - {len(prompt_token)}")
         generation_tokens, generation_logprobs = self.generate(
             prompt_tokens=prompt_tokens,
             max_gen_len=max_gen_len,
@@ -331,6 +333,8 @@ class Llama:
                 }
                 for t, logprobs_i in zip(generation_tokens, generation_logprobs)
             ]
+        for gen_token in generation_tokens:
+            print(f"Total number of output tokens - {len(gen_token)}")
         return [
             {
                 "generation": {

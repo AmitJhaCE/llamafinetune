@@ -8,10 +8,6 @@ import fire
 from llama import Dialog, Llama
 
 
-def generate_user_prompt():
-    user_input = input()
-    return {"role": "user", "content": user_input}
-
 def main(
     ckpt_dir: str,
     tokenizer_path: str,
